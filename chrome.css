@@ -1,9 +1,235 @@
-.folder-count-badge.unread-count {
-  background-color: var(--badge-bg) !important;
-  color: var(--badge-text) !important;
-}
+@import url("palette.css");
 
-#threadTree {
-  --tree-view-bg: var(--ef-tree-view-bg) !important;
-  color: var(--ef-tree-view-color) !important;
+/* Theme experiment: follow Thunderbird 159's layout/semantic tokens rather than
+ * painting every descendant. Native forced-colour accessibility wins. */
+@media screen and (not (forced-colors: active)) {
+  :root {
+    color-scheme: dark;
+    accent-color: var(--ef-green);
+    --layout-background-0: var(--ef-bg0) !important;
+    --layout-background-1: var(--ef-bg1) !important;
+    --layout-background-2: var(--ef-bg2) !important;
+    --layout-background-3: var(--ef-bg2) !important;
+    --layout-background-4: var(--ef-bg3) !important;
+    --layout-color-0: var(--ef-fg) !important;
+    --layout-color-1: var(--ef-fg) !important;
+    --layout-color-2: var(--ef-grey2) !important;
+    --layout-color-3: var(--ef-grey1) !important;
+    --layout-border-0: var(--ef-bg4) !important;
+    --layout-border-1: var(--ef-bg4) !important;
+    --layout-border-2: var(--ef-grey0) !important;
+    --color-surface-base: var(--ef-bg0) !important;
+    --color-surface-lower: var(--ef-bg-dim) !important;
+    --color-surface-subtle: var(--ef-bg1) !important;
+    --color-surface-raised: var(--ef-bg2) !important;
+    --color-surface-deep: var(--ef-bg3) !important;
+    --color-surface-border: var(--ef-bg4) !important;
+    --color-surface-border-intense: var(--ef-grey0) !important;
+    --color-text-base: var(--ef-fg) !important;
+    --color-text-base-inverted: var(--ef-bg0) !important;
+    --color-text-secondary: var(--ef-grey2) !important;
+    --color-text-muted: var(--ef-grey2) !important;
+    --color-text-disabled: var(--ef-grey1) !important;
+    --color-text-brand: var(--ef-aqua) !important;
+    --color-text-highlight: var(--ef-green) !important;
+    --color-text-warning: var(--ef-yellow) !important;
+    --color-text-critical: var(--ef-red) !important;
+    --color-text-success: var(--ef-green) !important;
+    --color-primary-default: var(--ef-green) !important;
+    --color-primary-hover: var(--ef-aqua) !important;
+    --color-primary-pressed: var(--ef-yellow) !important;
+    --color-primary-soft: var(--ef-bg-green) !important;
+    --color-success-default: var(--ef-green) !important;
+    --color-success-hover: var(--ef-aqua) !important;
+    --color-success-pressed: var(--ef-green) !important;
+    --color-success-soft: var(--ef-bg-green) !important;
+    --color-warning-default: var(--ef-yellow) !important;
+    --color-warning-hover: var(--ef-orange) !important;
+    --color-warning-pressed: var(--ef-yellow) !important;
+    --color-warning-soft: var(--ef-bg-yellow) !important;
+    --color-critical-default: var(--ef-red) !important;
+    --color-critical-hover: var(--ef-orange) !important;
+    --color-critical-pressed: var(--ef-red) !important;
+    --color-critical-soft: var(--ef-bg-red) !important;
+    --color-accent-teal: var(--ef-aqua) !important;
+    --color-accent-blue: var(--ef-blue) !important;
+    --color-accent-purple: var(--ef-purple) !important;
+    --color-accent-orange: var(--ef-orange) !important;
+    --color-accent-pink: var(--ef-purple) !important;
+    --color-accent-ink: var(--ef-grey2) !important;
+    --selected-item-color: var(--ef-bg-green) !important;
+    --selected-item-text-color: var(--ef-fg) !important;
+    --item-focus-selected-border-color: var(--ef-green) !important;
+    --focus-outline-color: var(--ef-green) !important;
+    --link-color: var(--ef-blue) !important;
+    --link-color-hover: var(--ef-aqua) !important;
+    --link-color-active: var(--ef-green) !important;
+    --link-color-visited: var(--ef-purple) !important;
+    --in-content-page-background: var(--ef-bg0) !important;
+    --in-content-page-color: var(--ef-fg) !important;
+    --in-content-box-background: var(--ef-bg1) !important;
+    --in-content-box-border-color: var(--ef-bg4) !important;
+    --in-content-primary-button-background: var(--ef-green) !important;
+    --in-content-primary-button-text-color: var(--ef-bg0) !important;
+    --in-content-link-color: var(--ef-blue) !important;
+    --toolbar-background-color: var(--ef-bg0) !important;
+    --toolbar-text-color: var(--ef-fg) !important;
+    --toolbar-field-background-color: var(--ef-bg1) !important;
+    --toolbar-field-color: var(--ef-fg) !important;
+    --toolbar-field-border-color: var(--ef-bg4) !important;
+    --toolbar-field-focus-border-color: var(--ef-green) !important;
+    --sidebar-background-color: var(--ef-bg1) !important;
+    --sidebar-text-color: var(--ef-fg) !important;
+    --sidebar-border-color: var(--ef-bg4) !important;
+    --sidebar-highlight-background-color: var(--ef-bg-green) !important;
+    --sidebar-highlight-text-color: var(--ef-fg) !important;
+    --sidebar-highlight-border-color: var(--ef-green) !important;
+    --tree-view-bg: var(--ef-bg0) !important;
+    --tree-view-color: var(--ef-fg) !important;
+    --tree-view-header-background: var(--ef-bg1) !important;
+    --tree-view-header-color: var(--ef-fg) !important;
+    --tree-view-row-hover-background: var(--ef-bg2) !important;
+    --tree-view-selected-background: var(--ef-bg-green) !important;
+    --tree-view-selected-color: var(--ef-fg) !important;
+    --thread-pane-flag-fill: var(--ef-yellow) !important;
+    --thread-pane-flag-stroke: var(--ef-yellow) !important;
+    --thread-pane-unread-fill: var(--ef-green) !important;
+    --thread-pane-unread-stroke: var(--ef-green) !important;
+    --thread-pane-spam-fill: var(--ef-red) !important;
+    --thread-pane-spam-stroke: var(--ef-red) !important;
+    --spaces-bg-color: var(--ef-bg-dim) !important;
+    --spaces-bg-image: none !important;
+    --spaces-button-text-color: var(--ef-fg) !important;
+    --spaces-button-active-text-color: var(--ef-bg0) !important;
+    --spaces-button-active-bg-color: var(--ef-green) !important;
+    --spaces-button-badge-text-color: var(--ef-bg0) !important;
+    --spaces-button-badge-bg-color: var(--ef-yellow) !important;
+    --spaces-bg: var(--ef-bg-dim) !important;
+    --spaces-toolbar-background-color: var(--ef-bg-dim) !important;
+    --new-folder-color: var(--ef-green) !important;
+    --button-background-color: var(--ef-bg2) !important;
+    --button-hover-background-color: var(--ef-bg3) !important;
+    --button-active-background-color: var(--ef-bg4) !important;
+    --button-background-color-hover: var(--ef-bg3) !important;
+    --button-background-color-active: var(--ef-bg4) !important;
+    --button-border-color: var(--ef-bg4) !important;
+    --button-text-color: var(--ef-fg) !important;
+    --button-primary-background-color: var(--ef-green) !important;
+    --button-primary-hover-background-color: var(--ef-aqua) !important;
+    --button-primary-active-background-color: var(--ef-yellow) !important;
+    --button-primary-text-color: var(--ef-bg0) !important;
+    --button-primary-border-color: var(--ef-green) !important;
+    --button-destructive-background-color: var(--ef-red) !important;
+    --button-destructive-hover-background-color: var(--ef-orange) !important;
+    --button-destructive-active-background-color: var(--ef-red) !important;
+    --button-destructive-text-color: var(--ef-bg0) !important;
+    --button-destructive-border-color: var(--ef-red) !important;
+    --button-link-text-color: var(--ef-blue) !important;
+    --button-link-active-text-color: var(--ef-aqua) !important;
+    --input-bgcolor: var(--ef-bg1) !important;
+    --input-color: var(--ef-fg) !important;
+    --input-border-color: var(--ef-bg4) !important;
+    --input-border-color-hover: var(--ef-grey1) !important;
+    --input-border-color-focus: var(--ef-green) !important;
+    --background-color-box: var(--ef-bg1) !important;
+    --background-color-box-info: var(--ef-bg-blue) !important;
+    --background-color-box-warning: var(--ef-bg-yellow) !important;
+    --background-color-box-critical: var(--ef-bg-red) !important;
+  }
+
+  :root, #folderPane, #threadPane, #messagePane, #messageHeader,
+  #headers-box, #attachmentView, #composeContentBox {
+    background-color: var(--ef-bg0);
+    color: var(--ef-fg);
+  }
+
+  #folderPane {
+    background-color: var(--ef-bg1) !important;
+  }
+
+  #spacesToolbar {
+    background-color: var(--ef-bg-dim) !important;
+    color: var(--ef-fg) !important;
+  }
+
+  :is(menupopup, panel):not(.autoscroller) {
+    --panel-background-color: var(--ef-bg2) !important;
+    --panel-text-color: var(--ef-fg) !important;
+    --panel-border-color: var(--ef-bg4) !important;
+  }
+
+  .folder-count-badge.unread-count {
+    background-color: var(--ef-green) !important;
+    color: var(--ef-bg0) !important;
+  }
+
+  /* Thunderbird card defaults use raw neutral colours, not layout tokens. */
+  #threadTree .card-container {
+    background-color: var(--ef-bg1) !important;
+    color: var(--ef-fg) !important;
+    border-color: var(--ef-bg4) !important;
+  }
+
+  #threadTree .card-layout:hover .card-container {
+    background-color: var(--ef-bg2) !important;
+  }
+
+  #threadTree .card-layout.selected .card-container {
+    background-color: var(--ef-bg-green) !important;
+    color: var(--ef-fg) !important;
+    border-color: var(--ef-green) !important;
+  }
+
+  #threadTree .card-layout .date {
+    color: var(--ef-grey2) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="unread"] .subject {
+    color: var(--ef-fg) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="hasUnread"] button.twisty::before {
+    fill: var(--ef-green) !important;
+    stroke: var(--ef-green) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="hasUnread"][data-properties~="hasNew"] button.twisty::before {
+    fill: var(--ef-yellow) !important;
+    stroke: var(--ef-yellow) !important;
+  }
+
+  /* Host variables also reach the notification's shadow-DOM controls. */
+  notification-message {
+    --message-bar-background-color: var(--ef-bg-blue) !important;
+    --message-bar-text-color: var(--ef-fg) !important;
+    --button-background-color: var(--ef-bg2) !important;
+    --button-background-color-hover: var(--ef-bg3) !important;
+    --button-background-color-active: var(--ef-bg4) !important;
+    --button-text-color: var(--ef-fg) !important;
+    --button-text-color-hover: var(--ef-fg) !important;
+    --button-text-color-active: var(--ef-fg) !important;
+    --button-border-color: var(--ef-bg4) !important;
+  }
+
+  notification-message[type="warning"] {
+    --message-bar-background-color: var(--ef-bg-yellow) !important;
+    --message-bar-text-color: var(--ef-yellow) !important;
+  }
+
+  notification-message[type="success"] {
+    --message-bar-background-color: var(--ef-bg-green) !important;
+    --message-bar-text-color: var(--ef-green) !important;
+    --icon-color-success: var(--ef-green) !important;
+  }
+
+  notification-message:is([type="error"], [type="critical"]) {
+    --message-bar-background-color: var(--ef-bg-red) !important;
+    --message-bar-text-color: var(--ef-red) !important;
+    --icon-color-critical: var(--ef-red) !important;
+  }
+
+  ::selection {
+    background-color: var(--ef-bg-visual);
+    color: var(--ef-fg);
+  }
 }

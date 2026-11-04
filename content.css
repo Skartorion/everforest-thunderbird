@@ -1,31 +1,38 @@
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #2c353a !important;
-    color: #d8caac !important;
-    accent-color: #a7c080 !important;
-    caret-color: #a7c080 !important;
+/* Plain/flowed messages only. Do not recolour newsletters, logos or author HTML.
+ * Thunderbird's own dark-message toggle remains available for HTML messages. */
+@media screen and (not (forced-colors: active)) {
+  html:has(body > :is(.moz-text-plain, .moz-text-flowed)),
+  body:has(> :is(.moz-text-plain, .moz-text-flowed)) {
+    color-scheme: dark;
+    background-color: var(--ef-bg0) !important;
+    color: var(--ef-fg) !important;
+    caret-color: var(--ef-green);
   }
-  a {
-    color: #86bfb7 !important;
-  }
-  ::selection {
-    background-color: #505a60 !important;
-    color: #d8caac !important;
-  }
-}
 
-@media (prefers-color-scheme: light) {
-  body {
-    background-color: #ede3c8 !important;
-    color: #4f5b62 !important;
-    accent-color: #47661b !important;
-    caret-color: #47661b !important;
+  :is(.moz-text-plain, .moz-text-flowed) {
+    color: var(--ef-fg) !important;
+    background-color: var(--ef-bg0) !important;
   }
-  a {
-    color: #2e7099 !important;
+
+  :is(.moz-text-plain, .moz-text-flowed) a:link {
+    color: var(--ef-blue) !important;
   }
-  ::selection {
-    background-color: #c3b9a0 !important;
-    color: #4f5b62 !important;
+
+  :is(.moz-text-plain, .moz-text-flowed) a:visited {
+    color: var(--ef-purple) !important;
+  }
+
+  :is(.moz-text-plain, .moz-text-flowed) a:hover {
+    color: var(--ef-aqua) !important;
+  }
+
+  :is(.moz-text-plain, .moz-text-flowed) blockquote[type="cite"] {
+    color: var(--ef-grey2) !important;
+    border-color: var(--ef-aqua) !important;
+  }
+
+  :is(.moz-text-plain, .moz-text-flowed) ::selection {
+    background-color: var(--ef-bg-visual) !important;
+    color: var(--ef-fg) !important;
   }
 }

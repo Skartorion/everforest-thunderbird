@@ -1,0 +1,19 @@
+/* Editor presentation only: do not write body colour attributes or inline CSS.
+ * Explicit author/body colours, signatures and quotations remain intact. */
+@media screen and (not (forced-colors: active)) {
+  :root {
+    color-scheme: dark;
+    background-color: var(--ef-bg0);
+  }
+
+  body:not([bgcolor]):not([text]):not([style*="color" i]) {
+    background-color: var(--ef-bg0) !important;
+    color: var(--ef-fg) !important;
+    caret-color: var(--ef-green);
+  }
+
+  ::selection {
+    background-color: var(--ef-bg-visual);
+    color: var(--ef-fg);
+  }
+}

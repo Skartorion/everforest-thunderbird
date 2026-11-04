@@ -1,19 +1,19 @@
 {
   "manifest_version": 2,
-  "name": "Everforest Night",
-  "version": "2.0.0",
-  "description": "A green-based theme for Thunderbird, designed to stay warm and readable during long coding sessions",
-  "author": "jarith",
-  "homepage_url": "https://github.com/jarith/everforest-night-thunderbird",
+  "name": "Everforest Dark Medium",
+  "version": "3.0.0",
+  "description": "Exact Everforest Dark Medium colours for Thunderbird application chrome, message lists and reading/compose surfaces.",
+  "author": "Skartorion; based on Everforest Night by jarith",
+  "homepage_url": "https://github.com/Skartorion/everforest-thunderbird",
   "developer": {
-    "name": "jarith",
-    "url": "https://github.com/jarith"
+    "name": "Skartorion",
+    "url": "https://github.com/Skartorion/everforest-thunderbird"
   },
   "browser_specific_settings": {
     "gecko": {
       "id": "everforest-night@jarith",
-      "strict_min_version": "128.0",
-      "strict_max_version": "180.0"
+      "strict_min_version": "159.0",
+      "strict_max_version": "159.*"
     }
   },
   "icons": {
@@ -24,16 +24,43 @@
   "theme_experiment": {
     "stylesheet": "chrome.css",
     "colors": {
-      "badge_bg": "--badge-bg",
-      "badge_text": "--badge-text",
-      "tree_view_bg": "--ef-tree-view-bg",
-      "tree_view_color": "--ef-tree-view-color",
-      "spaces_bg": "--spaces-bg",
-      "new_folder_color": "--new-folder-color"
+      "everforest_bg_dim": "--ef-bg-dim",
+      "everforest_bg0": "--ef-bg0",
+      "everforest_bg1": "--ef-bg1",
+      "everforest_bg2": "--ef-bg2",
+      "everforest_bg3": "--ef-bg3",
+      "everforest_bg4": "--ef-bg4",
+      "everforest_bg5": "--ef-bg5",
+      "everforest_bg_visual": "--ef-bg-visual",
+      "everforest_bg_red": "--ef-bg-red",
+      "everforest_bg_yellow": "--ef-bg-yellow",
+      "everforest_bg_green": "--ef-bg-green",
+      "everforest_bg_blue": "--ef-bg-blue",
+      "everforest_bg_purple": "--ef-bg-purple",
+      "everforest_fg": "--ef-fg",
+      "everforest_red": "--ef-red",
+      "everforest_orange": "--ef-orange",
+      "everforest_yellow": "--ef-yellow",
+      "everforest_green": "--ef-green",
+      "everforest_aqua": "--ef-aqua",
+      "everforest_blue": "--ef-blue",
+      "everforest_purple": "--ef-purple",
+      "everforest_grey0": "--ef-grey0",
+      "everforest_grey1": "--ef-grey1",
+      "everforest_grey2": "--ef-grey2"
     }
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "palette.js",
+      "theme.js",
+      "background.js"
+    ]
   },
-  "permissions": ["theme", "messagesRead", "compose", "scripting"]
+  "permissions": [
+    "theme",
+    "messagesRead",
+    "compose",
+    "scripting"
+  ]
 }
