@@ -1,0 +1,11 @@
+{
+  "name": "everforest-thunderbird",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Everforest Dark Medium for Thunderbird 159",
+  "scripts": {
+    "generate": "node scripts/generate-palette.mjs",
+    "test": "node scripts/generate-palette.mjs --check && node --test tests/*.test.mjs",
+    "build": "npm test && python3 scripts/package.py"
+  }
+}
