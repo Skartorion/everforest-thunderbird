@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+  "name": "Everforest Night",
+  "version": "2.0.0",
+  "description": "A green-based theme for Thunderbird, designed to stay warm and readable during long coding sessions",
+  "author": "jarith",
+  "homepage_url": "https://github.com/jarith/everforest-night-thunderbird",
+  "developer": {
+    "name": "jarith",
+    "url": "https://github.com/jarith"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "everforest-night@jarith",
+      "strict_min_version": "128.0",
+      "strict_max_version": "180.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-64.png"
+  },
+  "theme_experiment": {
+    "stylesheet": "chrome.css",
+    "colors": {
+      "badge_bg": "--badge-bg",
+      "badge_text": "--badge-text",
+      "tree_view_bg": "--ef-tree-view-bg",
+      "tree_view_color": "--ef-tree-view-color",
+      "spaces_bg": "--spaces-bg",
+      "new_folder_color": "--new-folder-color"
+    }
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["theme", "messagesRead", "compose", "scripting"]
+}

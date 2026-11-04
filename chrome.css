@@ -1,0 +1,9 @@
+.folder-count-badge.unread-count {
+  background-color: var(--badge-bg) !important;
+  color: var(--badge-text) !important;
+}
+
+#threadTree {
+  --tree-view-bg: var(--ef-tree-view-bg) !important;
+  color: var(--ef-tree-view-color) !important;
+}

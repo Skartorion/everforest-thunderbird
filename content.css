@@ -1,0 +1,31 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2c353a !important;
+    color: #d8caac !important;
+    accent-color: #a7c080 !important;
+    caret-color: #a7c080 !important;
+  }
+  a {
+    color: #86bfb7 !important;
+  }
+  ::selection {
+    background-color: #505a60 !important;
+    color: #d8caac !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #ede3c8 !important;
+    color: #4f5b62 !important;
+    accent-color: #47661b !important;
+    caret-color: #47661b !important;
+  }
+  a {
+    color: #2e7099 !important;
+  }
+  ::selection {
+    background-color: #c3b9a0 !important;
+    color: #4f5b62 !important;
+  }
+}
