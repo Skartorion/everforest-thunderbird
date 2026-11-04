@@ -1,0 +1,42 @@
+name: Build XPI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: xpi-${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate and package XPI
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Test and build compressed XPI
+        run: npm run build
+      - name: Verify XPI archive integrity
+        run: |
+          for xpi in dist/*.xpi; do
+            python3 -m zipfile -t "$xpi"
+          done
+      - name: Upload installable XPI
+        uses: actions/upload-artifact@v4
+        with:
+          name: everforest-dark-medium-${{ github.sha }}
+          path: dist/*.xpi
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
