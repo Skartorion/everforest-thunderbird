@@ -1,5 +1,5 @@
 > [!CAUTION]
-> You NEED to set toolkit.legacyUserProfileCustomizations.stylesheets to true in Thunderbird config editor!!!
+> **You NEED to set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true` in Thunderbird config editor!!!**
 
 
 
