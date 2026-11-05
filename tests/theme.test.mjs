@@ -60,8 +60,8 @@ test("screen styles preserve print and forced-colour accessibility", () => {
     assert.match(read(path), /@media screen and \(not \(forced-colors: active\)\)/, path);
   }
 });
-test("HTML message selectors stay scoped; compose never edits message DOM", () => {
-  assert.match(read("content.css"), /body > :is\(\.moz-text-plain, \.moz-text-flowed\)/);
+test("HTML reader styling stays scoped and never edits the compose DOM", () => {
+  assert.match(read("content.css"), /body > :is\(\.moz-text-plain, \.moz-text-flowed, \.moz-text-html\)/);
   assert.doesNotMatch(read("content.css"), /\*\s*\{/);
   assert.match(read("compose.css"), /body:not\(\[bgcolor\]\):not\(\[text\]\)/);
   assert.doesNotMatch(read("background.js"), /executeScript|setAttribute|fetch\(/);
@@ -99,4 +99,24 @@ test("registration errors are reported without blocking other surfaces", async (
   assert.equal(calls.length, 3);
   assert.equal(errors.length, 1);
   assert.match(errors[0][0], /message styles/);
+});
+
+
+test("legacy tree/card/folder tokens use the palette, including inactive selections", () => {
+  for (const token of ["tree-pane-background", "tree-card-background-selected-unfocused",
+    "tree-card-background-selected-current-unfocused", "listbox-color", "sidebar-background",
+    "folder-color-inbox", "folder-color-draft", "folderpane-unread-count-text"]) {
+    assert.ok(read("chrome.css").includes(`--${token}: var(--ef-`), token);
+  }
+  assert.match(read("chrome.css"), /#threadTree \{[\s\S]*?background-color: var\(--ef-bg0\) !important/);
+  assert.match(read("chrome.css"), /--read-status-fill: var\(--ef-green\) !important/);
+});
+
+test("HTML mail has presentation-only palette overrides without recolouring media", () => {
+  const css = read("content.css");
+  assert.match(css, /\.moz-text-html :is\(div/);
+  assert.match(css, /a:any-link/);
+  assert.doesNotMatch(css, /(?:^|,)\s*(?:img|svg|video|canvas)\b/m);
+  assert.doesNotMatch(css, /filter:|background-image:|display:|position:/);
+  assert.doesNotMatch(read("compose.css"), /moz-text-html/);
 });

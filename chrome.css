@@ -1,6 +1,6 @@
 @import url("palette.css");
 
-/* Theme experiment: follow Thunderbird 159's layout/semantic tokens rather than
+/* Theme experiment: cover modern and legacy layout/semantic tokens rather than
  * painting every descendant. Native forced-colour accessibility wins. */
 @media screen and (not (forced-colors: active)) {
   :root {
@@ -91,6 +91,64 @@
     --tree-view-row-hover-background: var(--ef-bg2) !important;
     --tree-view-selected-background: var(--ef-bg-green) !important;
     --tree-view-selected-color: var(--ef-fg) !important;
+    /* Older supported releases use separate tree/card/folder tokens. */
+    --tree-pane-background: var(--ef-bg0) !important;
+    --tree-card-background: var(--ef-bg1) !important;
+    --tree-card-border: var(--ef-bg4) !important;
+    --tree-card-border-hover: var(--ef-grey0) !important;
+    --tree-card-border-focus: var(--ef-green) !important;
+    --tree-card-border-selected: var(--ef-green) !important;
+    --tree-card-border-selected-unfocused: var(--ef-green) !important;
+    --tree-card-background-current: var(--ef-bg2) !important;
+    --tree-card-background-selected: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current: var(--ef-bg-green) !important;
+    --tree-card-background-current-unfocused: var(--ef-bg2) !important;
+    --tree-card-background-selected-unfocused: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current-unfocused: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current-unfocused-hover: var(--ef-bg-green) !important;
+    --tree-card-background-current-spam: var(--ef-bg-red) !important;
+    --tree-card-background-selected-spam: var(--ef-bg-red) !important;
+    --tree-card-background-selected-current-spam: var(--ef-bg-red) !important;
+    --tree-card-border-hover-spam: var(--ef-red) !important;
+    --tree-card-border-selected-spam: var(--ef-red) !important;
+    --listbox-color: var(--ef-fg) !important;
+    --listbox-selected-color: var(--ef-fg) !important;
+    --listbox-focused-selected-color: var(--ef-fg) !important;
+    --listbox-selected-bg: var(--ef-bg-green) !important;
+    --listbox-focused-selected-bg: var(--ef-bg-green) !important;
+    --listbox-hover: var(--ef-bg2) !important;
+    --tree-view-header-bg: var(--ef-bg1) !important;
+    --tree-view-header-hover-bg: var(--ef-bg2) !important;
+    --tree-view-header-hover-active-bg: var(--ef-bg3) !important;
+    --sidebar-background: var(--ef-bg1) !important;
+    --treeitem-background-selected: var(--ef-bg-green) !important;
+    --treeitem-background-active: var(--ef-bg-green) !important;
+    --treeitem-background-hover: var(--ef-bg2) !important;
+    --treeitem-text-active: var(--ef-fg) !important;
+    --folderpane-unread-count-background: var(--ef-green) !important;
+    --folderpane-unread-count-text: var(--ef-bg0) !important;
+    --folderpane-total-count-background: var(--ef-bg2) !important;
+    --folderpane-total-count-text: var(--ef-grey2) !important;
+    --folderpane-unread-new-count-background: var(--ef-aqua) !important;
+    /* Defaults only: per-folder custom --icon-color still wins on its row. */
+    --folder-color-inbox: var(--ef-blue) !important;
+    --folder-color-draft: var(--ef-purple) !important;
+    --folder-color-sent: var(--ef-green) !important;
+    --folder-color-archive: var(--ef-yellow) !important;
+    --folder-color-spam: var(--ef-red) !important;
+    --folder-color-trash: var(--ef-grey2) !important;
+    --folder-color-template: var(--ef-grey2) !important;
+    --folder-color-newsletter: var(--ef-grey2) !important;
+    --folder-color-rss: var(--ef-orange) !important;
+    --folder-color-outbox: var(--ef-aqua) !important;
+    --folder-color-folder: var(--ef-yellow) !important;
+    --folder-color-folder-filter: var(--ef-purple) !important;
+    --folder-color-folder-rss: var(--ef-orange) !important;
+    --folder-color-warning: var(--ef-red) !important;
+    --new-subject-color: var(--ef-green) !important;
+    --new-color: var(--ef-green) !important;
+    --unread-color: var(--ef-fg) !important;
+    --thread-line-color: var(--ef-bg4) !important;
     --thread-pane-flag-fill: var(--ef-yellow) !important;
     --thread-pane-flag-stroke: var(--ef-yellow) !important;
     --thread-pane-unread-fill: var(--ef-green) !important;
@@ -163,6 +221,28 @@
     color: var(--ef-bg0) !important;
   }
 
+  #threadTree {
+    background-color: var(--ef-bg0) !important;
+    color: var(--ef-fg) !important;
+    --tree-view-bg: var(--ef-bg0) !important;
+    --tree-view-color: var(--ef-fg) !important;
+    --tree-pane-background: var(--ef-bg0) !important;
+  }
+
+  #threadTree :is(.sender, .subject) {
+    color: var(--ef-fg) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="unread"] {
+    --read-status-fill: var(--ef-green) !important;
+    --read-status-stroke: var(--ef-green) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="unread"][data-properties~="new"] {
+    --read-status-fill: var(--ef-yellow) !important;
+    --read-status-stroke: var(--ef-yellow) !important;
+  }
+
   /* Thunderbird card defaults use raw neutral colours, not layout tokens. */
   #threadTree .card-container {
     background-color: var(--ef-bg1) !important;
@@ -196,6 +276,16 @@
   #threadTree .card-layout[data-properties~="hasUnread"][data-properties~="hasNew"] button.twisty::before {
     fill: var(--ef-yellow) !important;
     stroke: var(--ef-yellow) !important;
+  }
+
+  #threadTree .card-layout[data-properties~="junk"] .card-container {
+    background-color: var(--ef-bg-red) !important;
+    border-color: var(--ef-red) !important;
+  }
+
+  #threadTree .flagged {
+    --thread-pane-flag-fill: var(--ef-yellow) !important;
+    --thread-pane-flag-stroke: var(--ef-yellow) !important;
   }
 
   /* Host variables also reach the notification's shadow-DOM controls. */
