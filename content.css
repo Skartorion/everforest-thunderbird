@@ -1,37 +1,57 @@
-/* Plain/flowed messages only. Do not recolour newsletters, logos or author HTML.
- * Thunderbird's own dark-message toggle remains available for HTML messages. */
+/* Read-only message presentation: covers plain/flowed AND HTML messages.
+ * Keep this out of compose.css. Never change saved MIME, images, SVG or layout.
+ * Scope HTML overrides to text/surface elements instead of a universal repaint.
+ * Thunderbird's dark-message toggle controls its own conversion, not this CSS. */
 @media screen and (not (forced-colors: active)) {
-  html:has(body > :is(.moz-text-plain, .moz-text-flowed)),
-  body:has(> :is(.moz-text-plain, .moz-text-flowed)) {
+  html:has(body > :is(.moz-text-plain, .moz-text-flowed, .moz-text-html)),
+  body:has(> :is(.moz-text-plain, .moz-text-flowed, .moz-text-html)) {
     color-scheme: dark;
     background-color: var(--ef-bg0) !important;
     color: var(--ef-fg) !important;
     caret-color: var(--ef-green);
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) {
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html),
+  .moz-text-html :is(div, section, article, main, header, footer, nav, aside,
+    table, thead, tbody, tfoot, tr, td, th, p, span, font, center, address,
+    h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, strong, b, em, i, small) {
     color: var(--ef-fg) !important;
     background-color: var(--ef-bg0) !important;
+    border-color: var(--ef-bg4) !important;
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) a:link {
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) a:any-link,
+  .moz-text-html a:any-link :is(span, font, strong, b, em, i) {
     color: var(--ef-blue) !important;
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) a:visited {
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) a:visited,
+  .moz-text-html a:visited :is(span, font, strong, b, em, i) {
     color: var(--ef-purple) !important;
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) a:hover {
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) a:hover,
+  .moz-text-html a:hover :is(span, font, strong, b, em, i) {
     color: var(--ef-aqua) !important;
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) blockquote[type="cite"] {
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) :is(pre, code) {
+    color: var(--ef-fg) !important;
+    background-color: var(--ef-bg1) !important;
+    border-color: var(--ef-bg4) !important;
+  }
+
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) blockquote {
     color: var(--ef-grey2) !important;
+    background-color: var(--ef-bg0) !important;
     border-color: var(--ef-aqua) !important;
   }
 
-  :is(.moz-text-plain, .moz-text-flowed) ::selection {
+  .moz-text-html :is(hr, table, td, th) {
+    border-color: var(--ef-bg4) !important;
+  }
+
+  :is(.moz-text-plain, .moz-text-flowed, .moz-text-html) ::selection {
     background-color: var(--ef-bg-visual) !important;
     color: var(--ef-fg) !important;
   }
