@@ -64,25 +64,26 @@ jobs:
         with:
           name: everforest-dark-medium-${{ github.sha }}
           path: dist
-      - name: Commit updated package without triggering another build
+      - name: Commit package even when unchanged
         env:
           SOURCE_SHA: ${{ github.sha }}
           TARGET_BRANCH: ${{ github.ref_name }}
         run: |
           set -euo pipefail
+
           # Never publish an older build over a newer source commit.
           if [ "$(git rev-parse HEAD)" != "$SOURCE_SHA" ]; then
             echo "Branch advanced since this build; skipping stale package."
             exit 0
           fi
+
           install -m 644 dist/*.xpi everforest-dark-medium.xpi
           git add -- everforest-dark-medium.xpi
-          if git diff --cached --quiet; then
-            echo "Package is unchanged; nothing to commit."
-            exit 0
-          fi
+
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m "chore: update packaged XPI [skip ci]"
+
+          git commit --allow-empty -m "chore: update packaged XPI [skip ci]"
+
           # Normal push only: concurrent commits or branch protection must not be bypassed.
           git push origin "HEAD:$TARGET_BRANCH"
