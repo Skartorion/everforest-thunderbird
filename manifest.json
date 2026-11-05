@@ -11,7 +11,8 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "everforest-dark-medium@skartorion"
+      "id": "everforest-dark-medium@skartorion",
+      "strict_max_version": "159.0"
     }
   },
   "icons": {
