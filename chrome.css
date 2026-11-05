@@ -221,6 +221,9 @@
     color: var(--ef-bg0) !important;
   }
 
+  /* Set tokens on the tree/rows themselves: a value declared on a row wins
+   * over an inherited :root token, even when the inherited token is important.
+   * Cover both card wrappers and paint-bearing cells used by supported builds. */
   #threadTree {
     background-color: var(--ef-bg0) !important;
     color: var(--ef-fg) !important;
@@ -229,58 +232,98 @@
     --tree-pane-background: var(--ef-bg0) !important;
   }
 
-  #threadTree :is(.sender, .subject) {
+  #threadTree tbody > tr {
+    --tree-view-color: var(--ef-fg) !important;
+    --tree-card-background: var(--ef-bg1) !important;
+    --tree-card-border: var(--ef-bg4) !important;
+    --tree-card-background-current: var(--ef-bg2) !important;
+    --tree-card-background-selected: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current: var(--ef-bg-green) !important;
+    --tree-card-background-current-unfocused: var(--ef-bg2) !important;
+    --tree-card-background-selected-unfocused: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current-unfocused: var(--ef-bg-green) !important;
+    --tree-card-background-selected-current-unfocused-hover: var(--ef-bg-green) !important;
     color: var(--ef-fg) !important;
   }
 
-  #threadTree .card-layout[data-properties~="unread"] {
-    --read-status-fill: var(--ef-green) !important;
-    --read-status-stroke: var(--ef-green) !important;
+  #threadTree[rows="thread-card"] tr[is="thread-card"],
+  #threadTree[rows="thread-card"] tr[is="thread-card"] > td {
+    background-color: var(--ef-bg0) !important;
+    background-image: none !important;
+    color: var(--ef-fg) !important;
   }
 
-  #threadTree .card-layout[data-properties~="unread"][data-properties~="new"] {
-    --read-status-fill: var(--ef-yellow) !important;
-    --read-status-stroke: var(--ef-yellow) !important;
-  }
-
-  /* Thunderbird card defaults use raw neutral colours, not layout tokens. */
-  #threadTree .card-container {
+  /* background-color alone does not remove an opaque gradient/image above it.
+   * Scope the reset to row/card surfaces, never their icon/image descendants. */
+  #threadTree[rows="thread-card"] tr[is="thread-card"] :is(.card-container, .thread-card-container) {
     background-color: var(--ef-bg1) !important;
+    background-image: none !important;
     color: var(--ef-fg) !important;
     border-color: var(--ef-bg4) !important;
   }
 
-  #threadTree .card-layout:hover .card-container {
+  #threadTree[rows="thread-card"] tr[is="thread-card"]:is(:hover, .current) :is(.card-container, .thread-card-container) {
     background-color: var(--ef-bg2) !important;
   }
 
-  #threadTree .card-layout.selected .card-container {
+  #threadTree[rows="thread-card"] tr[is="thread-card"].selected :is(.card-container, .thread-card-container) {
     background-color: var(--ef-bg-green) !important;
-    color: var(--ef-fg) !important;
     border-color: var(--ef-green) !important;
   }
 
-  #threadTree .card-layout .date {
-    color: var(--ef-grey2) !important;
-  }
-
-  #threadTree .card-layout[data-properties~="unread"] .subject {
+  #threadTree[rows="thread-card"] tr[is="thread-card"] :is(.card-container, .thread-card-container) :is(.sender, .subject, .date) {
     color: var(--ef-fg) !important;
   }
 
-  #threadTree .card-layout[data-properties~="hasUnread"] button.twisty::before {
+  #threadTree[rows="thread-card"] tr[is="thread-card"] :is(.card-container, .thread-card-container) .date {
+    color: var(--ef-grey2) !important;
+  }
+
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="unread"] {
+    --read-status-fill: var(--ef-green) !important;
+    --read-status-stroke: var(--ef-green) !important;
+  }
+
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="unread"][data-properties~="new"] {
+    --read-status-fill: var(--ef-yellow) !important;
+    --read-status-stroke: var(--ef-yellow) !important;
+  }
+
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="hasUnread"] button.twisty::before {
     fill: var(--ef-green) !important;
     stroke: var(--ef-green) !important;
   }
 
-  #threadTree .card-layout[data-properties~="hasUnread"][data-properties~="hasNew"] button.twisty::before {
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="hasUnread"][data-properties~="hasNew"] button.twisty::before {
     fill: var(--ef-yellow) !important;
     stroke: var(--ef-yellow) !important;
   }
 
-  #threadTree .card-layout[data-properties~="junk"] .card-container {
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="junk"] :is(.card-container, .thread-card-container) {
     background-color: var(--ef-bg-red) !important;
     border-color: var(--ef-red) !important;
+  }
+
+  #threadTree[rows="thread-card"] tr[is="thread-card"][data-properties~="dummy"]:not(:hover, .current, .selected) :is(.card-container, .thread-card-container) {
+    background-color: var(--ef-bg0) !important;
+  }
+
+  /* Table rows/cells can paint over the tree background independently. */
+  #threadTree[rows="thread-row"] tbody > tr,
+  #threadTree[rows="thread-row"] tbody > tr > td {
+    background-color: var(--ef-bg0) !important;
+    background-image: none !important;
+    color: var(--ef-fg) !important;
+  }
+
+  #threadTree[rows="thread-row"] tbody > tr:is(:hover, .current),
+  #threadTree[rows="thread-row"] tbody > tr:is(:hover, .current) > td {
+    background-color: var(--ef-bg2) !important;
+  }
+
+  #threadTree[rows="thread-row"] tbody > tr.selected,
+  #threadTree[rows="thread-row"] tbody > tr.selected > td {
+    background-color: var(--ef-bg-green) !important;
   }
 
   #threadTree .flagged {

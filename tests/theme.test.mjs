@@ -120,3 +120,21 @@ test("HTML mail has presentation-only palette overrides without recolouring medi
   assert.doesNotMatch(css, /filter:|background-image:|display:|position:/);
   assert.doesNotMatch(read("compose.css"), /moz-text-html/);
 });
+
+
+test("inbox rules target row-local tokens and both card wrappers", () => {
+  const css = read("chrome.css");
+  assert.match(css, /#threadTree tbody > tr \{[\s\S]*?--tree-card-background: var\(--ef-bg1\) !important/);
+  assert.ok(css.includes(':is(.card-container, .thread-card-container)'));
+  assert.ok(css.includes('#threadTree[rows="thread-card"] tr[is="thread-card"].selected'));
+  assert.ok(css.includes('#threadTree[rows="thread-row"] tbody > tr.selected > td'));
+});
+
+test("painted inbox surfaces reset background images without touching icon images", () => {
+  const css = read("chrome.css");
+  const rule = '#threadTree[rows="thread-card"] tr[is="thread-card"] :is(.card-container, .thread-card-container)';
+  const block = css.slice(css.indexOf(rule)).split('}')[0];
+  assert.match(block, /background-image: none !important/);
+  assert.match(block, /background-color: var\(--ef-bg1\) !important/);
+  assert.doesNotMatch(css, /#threadTree[^{}]*\*[^{}]*\{/);
+});

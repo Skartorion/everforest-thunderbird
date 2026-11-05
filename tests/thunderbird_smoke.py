@@ -75,6 +75,39 @@ try:
     text = js(pane + "return [...p.document.querySelectorAll('.sender, .subject')].map(e=>p.getComputedStyle(e).color);")
     assert all(c == "rgb(211, 198, 170)" for c in text), text
     checks += ["card sender and subject palette"]
+    # A late author sheet reproduces the screenshot's black cards/white text.
+    # It is a controlled cascade fixture, not a claim about the user's profile.
+    js(pane + """
+      const style=p.document.createElement('style');style.id='everforest-cascade-fixture';
+      style.textContent=`
+        #threadTree tr {--tree-card-background:#18181b;--tree-view-color:white;}
+        #threadTree tr[is="thread-card"] .card-container {
+          background-color:#18181b !important;
+          background-image:linear-gradient(#18181b,#18181b) !important;
+          color:white !important;
+        }
+        #threadTree tr[is="thread-card"] .card-container :is(.sender,.subject,.date) {color:white !important;}
+        #threadTree tr[is="thread-card"].selected .card-container {
+          background-color:#44464f !important;
+          background-image:linear-gradient(#44464f,#44464f) !important;
+        }
+        #threadTree tr[is="thread-row"] td {
+          background-color:#18181b !important;
+          background-image:linear-gradient(#18181b,#18181b) !important;
+          color:white !important;
+        }
+      `;
+      p.document.head.appendChild(style);
+    """)
+    wait(pane + """const e=p.document.querySelector('.card-container');const c=p.getComputedStyle(e);
+      return c.backgroundColor==='rgb(52, 63, 68)' && c.backgroundImage==='none'
+        && p.getComputedStyle(e.querySelector('.sender')).color==='rgb(211, 198, 170)'
+        && p.getComputedStyle(e.querySelector('.date')).color==='rgb(157, 169, 160)';""")
+    checks += ["opaque card background and late text rule regression"]
+    js(pane + """const e=p.document.querySelector('.card-container');e.classList.replace('card-container','thread-card-container');""")
+    wait(pane + """const e=p.document.querySelector('.thread-card-container');return p.getComputedStyle(e).backgroundColor==='rgb(52, 63, 68)';""")
+    js(pane + """p.document.querySelector('.thread-card-container').classList.replace('thread-card-container','card-container');""")
+    checks += ["alternate card wrapper selector fixture"]
     js(pane + "p.threadTree.selectedIndex=1;p.threadTree.table.body.focus();return true;")
     wait(pane + "const e=p.document.querySelector('.card-layout.selected .card-container');return e && p.getComputedStyle(e).backgroundColor==='rgb(66, 80, 71)';")
     wait(message + "return !!b?.contentDocument?.querySelector('.moz-text-plain');")
@@ -86,6 +119,11 @@ try:
     js(pane + "Services.prefs.setIntPref('mail.threadpane.listview',1);p.threadPane.updateThreadView();return true;")
     wait(pane + "return p.threadTree.getAttribute('rows')==='thread-row' && p.getComputedStyle(p.threadTree).backgroundColor==='rgb(45, 53, 59)';")
     checks += ["table view background"]
+    wait(pane + """const e=p.document.querySelector('tr[is="thread-row"] td');const c=p.getComputedStyle(e);
+      return ['rgb(45, 53, 59)','rgb(61, 72, 77)','rgb(66, 80, 71)'].includes(c.backgroundColor)
+        && c.backgroundImage==='none' && c.color==='rgb(211, 198, 170)';""")
+    checks += ["table cell painted background regression"]
+    js(pane + "p.document.getElementById('everforest-cascade-fixture').remove();")
     js(pane + "p.threadTree.selectedIndex=2;return true;")
     wait(message + "return !!b?.contentDocument?.querySelector('#authored');")
     js(message + "const toggle=a.document.getElementById('disableDarkReader');if(!toggle.checked)toggle.click();return true;")
