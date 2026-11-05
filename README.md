@@ -1,6 +1,6 @@
 # 🌲 Everforest Medium Dark theme for Thunderbird
 
-[![Thunderbird Add-on](https://img.shields.io/badge/Thunderbird-Add--on-blue?logo=thunderbird)](https://addons.thunderbird.net)
+[![Thunderbird Add-on](https://img.shields.io/badge/Thunderbird-Add--on-blue?logo=thunderbird)](https://addons.thunderbird.net/en-us/thunderbird/addon/everforest-dark-medium/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 
