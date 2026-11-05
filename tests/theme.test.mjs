@@ -42,8 +42,8 @@ test("theme remains dark irrespective of system mode, without polling", () => {
 });
 test("runtime references exist and extension ID is retained for upgrades", () => {
   assert.equal(manifest.browser_specific_settings.gecko.id, "everforest-night@jarith");
-  assert.equal(manifest.browser_specific_settings.gecko.strict_min_version, "159.0");
-  assert.equal(manifest.browser_specific_settings.gecko.strict_max_version, "159.*");
+  assert.equal(manifest.browser_specific_settings.gecko.strict_min_version, "149.0");
+  assert.equal(manifest.browser_specific_settings.gecko.strict_max_version, "170.0");
   for (const file of [...manifest.background.scripts, ...Object.values(manifest.icons),
     manifest.theme_experiment.stylesheet, "content.css", "compose.css", "palette.css"]) {
     assert.ok(existsSync(resolve(root, file)), file);
