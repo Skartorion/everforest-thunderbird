@@ -8,5 +8,10 @@
 4. Restart Thunderbird
 5. Star the repo if you liked the theme
 
+### Example
+![Dude I spent like 10 minutes blurring this stuff lmao](example.png)
 
 Everforest Dark Medium for Thunderbird. Colours by [sainnhe](https://github.com/sainnhe/everforest). Based on [jarith’s](https://github.com/jarith/everforest-night-thunderbird) Everforest Night theme
+
+### Issues
+So, um, if there's any issues then make an issue!
