@@ -1,3 +1,10 @@
+# 🌲 Everforest Medium Dark theme for Thunderbird
+
+[![Thunderbird Add-on](https://img.shields.io/badge/Thunderbird-Add--on-blue?logo=thunderbird)](https://addons.thunderbird.net)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+
+
 > [!CAUTION]
 > **You NEED to set `toolkit.legacyUserProfileCustomizations.stylesheets` to `true` in Thunderbird config editor!!!**
 
